@@ -91,7 +91,8 @@ namespace Coevaluacion.Controllers
 
             if (!companeros.Any())
             {
-                TempData["ErrorMessage"] = "No hay compañeros de equipo para evaluar.";
+                // Restricción 7: Equipo Mínimo (evaluador + 0 compañeros = equipo de 1)
+                TempData["ErrorMessage"] = "El equipo debe contar con al menos dos integrantes para realizar coevaluaciones.";
                 return RedirectToAction(nameof(Seleccionar));
             }
 

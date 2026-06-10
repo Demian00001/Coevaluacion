@@ -146,7 +146,29 @@ namespace Coevaluacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // Verificar existencia antes de eliminar
+            // Obtener Ids de los integrantes del equipo
+            var integrantesIds = await _context.Integrantes
+                .Where(i => i.EquipoId == id)
+                .Select(i => i.Id)
+                .ToListAsync();
+
+            if (integrantesIds.Any())
+            {
+                // Restricción 2: Verificar si alguno tiene historial
+                bool tieneHistorial = await _context.Evaluaciones
+                    .AnyAsync(e => integrantesIds.Contains(e.EvaluadorId) || integrantesIds.Contains(e.EvaluadoId));
+
+                if (tieneHistorial)
+                {
+                    TempData["ErrorMessage"] = "No se puede eliminar el equipo porque contiene integrantes con historial de evaluaciones.";
+                    return RedirectToAction(nameof(Index));
+                }
+                
+                // Restricción 3 (Adicional): No permitir eliminar si tiene integrantes registrados
+                TempData["ErrorMessage"] = "No se puede eliminar el equipo porque posee integrantes registrados.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var equipo = await _context.Equipos.FindAsync(id);
             if (equipo != null)
             {

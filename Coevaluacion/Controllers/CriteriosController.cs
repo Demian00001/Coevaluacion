@@ -145,7 +145,15 @@ namespace Coevaluacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // Verificar existencia antes de eliminar
+            // Restricción 3: Verificar si existe en DetalleEvaluaciones
+            bool criterioUtilizado = await _context.DetallesEvaluacion.AnyAsync(d => d.CriterioId == id);
+            
+            if (criterioUtilizado)
+            {
+                TempData["ErrorMessage"] = "No se puede eliminar el criterio porque ya fue utilizado en evaluaciones registradas.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var criterio = await _context.Criterios.FindAsync(id);
             if (criterio != null)
             {

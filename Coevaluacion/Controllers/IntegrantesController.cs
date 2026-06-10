@@ -102,16 +102,32 @@ namespace Coevaluacion.Controllers
             {
                 try
                 {
-                    // Verificar existencia antes de actualizar
-                    var integranteExiste = await _context.Integrantes.AnyAsync(i => i.Id == id);
-                    if (!integranteExiste)
+                    var integranteOriginal = await _context.Integrantes.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+                    if (integranteOriginal == null)
                     {
                         return NotFound();
                     }
 
+                    // Restricción 5: No permitir cambiar de equipo si tiene historial
+                    if (integranteOriginal.EquipoId != integrante.EquipoId)
+                    {
+                        bool tieneHistorial = await _context.Evaluaciones
+                            .AnyAsync(e => e.EvaluadorId == id || e.EvaluadoId == id);
+
+                        if (tieneHistorial)
+                        {
+                            integrante.EquipoId = integranteOriginal.EquipoId; // Revertir cambio
+                            TempData["ErrorMessage"] = "No se puede cambiar de equipo porque el integrante posee historial de evaluaciones. Los demás datos sí fueron actualizados.";
+                        }
+                    }
+
                     _context.Update(integrante);
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessage"] = "Integrante actualizado correctamente.";
+
+                    if (TempData["ErrorMessage"] == null)
+                    {
+                        TempData["SuccessMessage"] = "Integrante actualizado correctamente.";
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -155,7 +171,16 @@ namespace Coevaluacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // Verificar existencia antes de eliminar
+            // Restricción 1: No permitir eliminar si ha sido evaluador o evaluado
+            bool tieneHistorial = await _context.Evaluaciones
+                .AnyAsync(e => e.EvaluadorId == id || e.EvaluadoId == id);
+
+            if (tieneHistorial)
+            {
+                TempData["ErrorMessage"] = "No se puede eliminar el integrante porque posee historial de evaluaciones.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var integrante = await _context.Integrantes.FindAsync(id);
             if (integrante != null)
             {

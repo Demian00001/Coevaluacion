@@ -55,10 +55,19 @@ namespace Coevaluacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,FechaInicio,FechaFin,Activo")] Periodo periodo)
         {
-            // La validación de negocio (FechaFin >= FechaInicio) se maneja automáticamente 
-            // mediante la implementación de IValidatableObject en la entidad Periodo.
             if (ModelState.IsValid)
             {
+                // Restricción 6: Si el nuevo periodo es activo, desactivar los demás
+                if (periodo.Activo)
+                {
+                    var periodosActivos = await _context.Periodos.Where(p => p.Activo).ToListAsync();
+                    foreach (var p in periodosActivos)
+                    {
+                        p.Activo = false;
+                        _context.Update(p);
+                    }
+                }
+
                 _context.Add(periodo);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Período creado correctamente.";
@@ -102,6 +111,17 @@ namespace Coevaluacion.Controllers
                     if (!periodoExiste)
                     {
                         return NotFound();
+                    }
+
+                    // Restricción 6: Si el periodo modificado se marca como activo, desactivar los demás
+                    if (periodo.Activo)
+                    {
+                        var periodosActivos = await _context.Periodos.Where(p => p.Activo && p.Id != periodo.Id).ToListAsync();
+                        foreach (var p in periodosActivos)
+                        {
+                            p.Activo = false;
+                            _context.Update(p);
+                        }
                     }
 
                     _context.Update(periodo);
@@ -148,7 +168,22 @@ namespace Coevaluacion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // Verificar existencia antes de eliminar
+            // Nueva Restricción: No permitir eliminar un periodo activo
+            bool esActivo = await _context.Periodos.AnyAsync(p => p.Id == id && p.Activo);
+            if (esActivo)
+            {
+                TempData["ErrorMessage"] = "No se puede eliminar un período activo.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Restricción 4: No permitir eliminar un periodo con evaluaciones
+            bool tieneEvaluaciones = await _context.Evaluaciones.AnyAsync(e => e.PeriodoId == id);
+            if (tieneEvaluaciones)
+            {
+                TempData["ErrorMessage"] = "No se puede eliminar el periodo porque posee evaluaciones registradas.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var periodo = await _context.Periodos.FindAsync(id);
             if (periodo != null)
             {
