@@ -1,0 +1,49 @@
+@model Coevaluacion.ViewModels.SeleccionReporteViewModel
+
+@{
+    ViewData["Title"] = "Reporte Individual por Estudiante";
+}
+
+<h1>Reporte Individual</h1>
+<h4 class="text-muted">Generar reporte de resultados</h4>
+<hr />
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Individual">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="PeriodoId" class="control-label fw-bold"></label>
+                <select asp-for="PeriodoId" class="form-select" asp-items="ViewBag.PeriodoId">
+                    <option value="">-- Seleccione el Periodo --</option>
+                </select>
+                <span asp-validation-for="PeriodoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="EstudianteId" class="control-label fw-bold"></label>
+                <select asp-for="EstudianteId" class="form-select" asp-items="ViewBag.EstudianteId">
+                    <option value="">-- Seleccione el Estudiante --</option>
+                </select>
+                <span asp-validation-for="EstudianteId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">Generar Reporte</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

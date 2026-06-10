@@ -1,49 +1,64 @@
-@model Coevaluacion.ViewModels.SeleccionReporteViewModel
-
 @{
-    ViewData["Title"] = "Reporte Individual por Estudiante";
+    ViewData["Title"] = "Centro de Reportes";
 }
 
-<h1>Reporte Individual</h1>
-<h4 class="text-muted">Generar reporte de resultados</h4>
-<hr />
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        @TempData["ErrorMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
-<div class="row">
-    <div class="col-md-5">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group mb-3">
-                <label asp-for="PeriodoId" class="control-label fw-bold"></label>
-                <select asp-for="PeriodoId" class="form-select" asp-items="ViewBag.PeriodoId">
-                    <option value="">-- Seleccione el Periodo --</option>
-                </select>
-                <span asp-validation-for="PeriodoId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-4">
-                <label asp-for="EstudianteId" class="control-label fw-bold"></label>
-                <select asp-for="EstudianteId" class="form-select" asp-items="ViewBag.EstudianteId">
-                    <option value="">-- Seleccione el Estudiante --</option>
-                </select>
-                <span asp-validation-for="EstudianteId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg">Generar Reporte</button>
-            </div>
-        </form>
-    </div>
+<div class="text-center mb-5">
+    <h1 class="display-4">Centro de Reportes</h1>
+    <p class="lead text-muted">Seleccione el tipo de reporte que desea consultar.</p>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<div class="row justify-content-center">
+    <!-- Tarjeta: Reporte Individual -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 border-primary text-center">
+            <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                    <i class="bi bi-person-badge fs-1 text-primary"></i>
+                </div>
+                <h3 class="card-title">Reporte Individual</h3>
+                <p class="card-text text-muted flex-grow-1 mt-2">
+                    Consultar el desempeño de un estudiante específico durante un período basándose en las calificaciones recibidas por sus compañeros.
+                </p>
+                <div class="mt-4">
+                    <a asp-action="Individual" class="btn btn-primary btn-lg w-100">Ver Reporte Individual</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta: Reporte por Equipo -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 border-success text-center">
+            <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                    <i class="bi bi-people fs-1 text-success"></i>
+                </div>
+                <h3 class="card-title">Reporte por Equipo</h3>
+                <p class="card-text text-muted flex-grow-1 mt-2">
+                    Consultar el desempeño completo de un equipo durante un período y visualizar el ranking de sus integrantes.
+                </p>
+                <div class="mt-4">
+                    <a asp-action="Equipo" class="btn btn-success btn-lg w-100">Ver Reporte por Equipo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta: Ranking General -->
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 border-warning text-center">
+            <div class="card-body d-flex flex-column">
+                <div class="mb-3">
+                    <i class="bi bi-trophy fs-1 text-warning"></i>
+                </div>
+                <h3 class="card-title">Ranking General</h3>
+                <p class="card-text text-muted flex-grow-1 mt-2">
+                    Consultar el desempeño general y el escalafón de todos los estudiantes evaluados durante un período.
+                </p>
+                <div class="mt-4">
+                    <a asp-action="RankingGeneral" class="btn btn-warning btn-lg w-100 text-white">Ver Ranking</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

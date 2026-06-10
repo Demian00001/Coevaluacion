@@ -1,0 +1,41 @@
+@model Coevaluacion.ViewModels.SeleccionRankingViewModel
+
+@{
+    ViewData["Title"] = "Ranking General";
+}
+
+<h1>Ranking General</h1>
+<h4 class="text-muted">Desempeño global por período</h4>
+<hr />
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="RankingGeneral">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-4">
+                <label asp-for="PeriodoId" class="control-label fw-bold"></label>
+                <select asp-for="PeriodoId" class="form-select" asp-items="ViewBag.PeriodoId">
+                    <option value="">-- Seleccione el Periodo --</option>
+                </select>
+                <span asp-validation-for="PeriodoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning btn-lg text-white">Generar Ranking General</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

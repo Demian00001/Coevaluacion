@@ -130,12 +130,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGVyaW9kb3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/Equipo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvRXF1aXBvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/GenerarRankingGeneral.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvR2VuZXJhclJhbmtpbmdHZW5lcmFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/Resultado.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvUmVzdWx0YWRvLmNzaHRtbA==
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/Individual.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvSW5kaXZpZHVhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/RankingGeneral.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvUmFua2luZ0dlbmVyYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/ResultadoEquipo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvUmVzdWx0YWRvRXF1aXBvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Reportes/ResultadoIndividual.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZXMvUmVzdWx0YWRvSW5kaXZpZHVhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Shared/Error.cshtml]

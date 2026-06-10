@@ -1,0 +1,88 @@
+@model Coevaluacion.ViewModels.RankingGeneralViewModel
+
+@{
+    ViewData["Title"] = "Ranking General";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Ranking General</h1>
+    <a asp-action="RankingGeneral" class="btn btn-secondary">← Nuevo Ranking</a>
+</div>
+
+<div class="card shadow-sm mb-4 border-warning">
+    <div class="card-body bg-light">
+        <div class="row text-center">
+            <div class="col-md-3 border-end">
+                <h5 class="mb-1">Periodo</h5>
+                <h4 class="text-warning">@Model.PeriodoNombre</h4>
+            </div>
+            <div class="col-md-3 border-end">
+                <h5 class="mb-1">Total Estudiantes</h5>
+                <h4 class="text-dark">@Model.TotalEstudiantes</h4>
+            </div>
+            <div class="col-md-3 border-end">
+                <h5 class="mb-1">Promedio Global</h5>
+                <h4 class="text-info">@Html.DisplayFor(m => m.PromedioGlobal)</h4>
+            </div>
+            <div class="col-md-3">
+                <h5 class="mb-1">Mejor / Peor</h5>
+                <h4 class="text-muted">
+                    <span class="text-success">@Html.DisplayFor(m => m.MejorPromedio)</span> / 
+                    <span class="text-danger">@Html.DisplayFor(m => m.PeorPromedio)</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped table-hover mt-3 shadow-sm align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th class="text-center" style="width: 100px;">Posición</th>
+            <th>Nombre Completo</th>
+            <th>Equipo</th>
+            <th class="text-center">Promedio General</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estudiante in Model.Estudiantes)
+        {
+            <tr class="@(estudiante.Posicion == 1 ? "table-warning fw-bold" : (estudiante.Posicion == 2 ? "table-light fw-bold" : (estudiante.Posicion == 3 ? "table-danger fw-bold text-dark" : "")))">
+                <td class="text-center">
+                    @if (estudiante.Posicion == 1)
+                    {
+                        <i class="bi bi-trophy-fill text-warning fs-4"></i>
+                    }
+                    else if (estudiante.Posicion == 2)
+                    {
+                        <i class="bi bi-award-fill text-secondary fs-4"></i>
+                    }
+                    else if (estudiante.Posicion == 3)
+                    {
+                        <i class="bi bi-award-fill text-danger fs-4"></i>
+                    }
+                    else
+                    {
+                        <span class="fs-5 text-muted">@estudiante.Posicion</span>
+                    }
+                </td>
+                <td>
+                    @estudiante.NombreCompleto
+                    @if (estudiante.Posicion <= 3)
+                    {
+                        <br />
+                        <small class="text-muted">
+                            @(estudiante.Posicion == 1 ? "Primer Lugar" : (estudiante.Posicion == 2 ? "Segundo Lugar" : "Tercer Lugar"))
+                        </small>
+                    }
+                </td>
+                <td>@estudiante.EquipoNombre</td>
+                <td class="text-center">
+                    <span class="badge @(estudiante.PromedioGeneral >= 8 ? "bg-success" : (estudiante.PromedioGeneral >= 6 ? "bg-warning" : "bg-danger")) fs-5 px-3 py-2">
+                        @Html.DisplayFor(m => estudiante.PromedioGeneral)
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
