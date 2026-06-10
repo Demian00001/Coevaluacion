@@ -212,3 +212,4 @@
 /Users/damian/Documents/Coevaluacion/Coevaluacion/bin/Debug/net10.0/runtimes/win-x86/native/e_sqlite3.dll
 /Users/damian/Documents/Coevaluacion/Coevaluacion/obj/Debug/net10.0/Coevaluacion.csproj.AssemblyReference.cache
 /Users/damian/Documents/Coevaluacion/Coevaluacion/obj/Debug/net10.0/Coevalua.B4DC6099.Up2Date
+/Users/damian/Documents/Coevaluacion/Coevaluacion/obj/Debug/net10.0/Coevaluacion.sourcelink.json
