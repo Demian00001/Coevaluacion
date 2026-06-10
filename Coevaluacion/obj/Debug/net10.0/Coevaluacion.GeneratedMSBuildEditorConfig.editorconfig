@@ -58,6 +58,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Integrantes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYW50ZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Integrantes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYW50ZXMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Integrantes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYW50ZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Integrantes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYW50ZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Integrantes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW50ZWdyYW50ZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
