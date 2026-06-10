@@ -13,6 +13,8 @@ namespace Coevaluacion.Data
         public DbSet<Integrante> Integrantes { get; set; }
         public DbSet<Criterio> Criterios { get; set; }
         public DbSet<Periodo> Periodos { get; set; }
+        public DbSet<Evaluacion> Evaluaciones { get; set; }
+        public DbSet<DetalleEvaluacion> DetallesEvaluacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +25,18 @@ namespace Coevaluacion.Data
                 .HasMany(e => e.Integrantes)
                 .WithOne(i => i.Equipo)
                 .HasForeignKey(i => i.EquipoId);
+
+            modelBuilder.Entity<Evaluacion>()
+                .HasOne(e => e.Evaluador)
+                .WithMany()
+                .HasForeignKey(e => e.EvaluadorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Evaluacion>()
+                .HasOne(e => e.Evaluado)
+                .WithMany()
+                .HasForeignKey(e => e.EvaluadoId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
