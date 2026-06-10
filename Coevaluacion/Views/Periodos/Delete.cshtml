@@ -1,0 +1,45 @@
+@model Coevaluacion.Models.Periodo
+
+@{
+    ViewData["Title"] = "Eliminar Periodo";
+}
+
+<h1>Eliminar Periodo</h1>
+
+<h3 class="text-danger">¿Estás seguro de que quieres eliminar este periodo?</h3>
+<div>
+    <h4>Periodo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.FechaInicio.ToShortDateString()
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.FechaFin.ToShortDateString()
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class = "col-sm-9">
+            @(Model.Activo ? "Sí" : "No")
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+@model Coevaluacion.Models.Periodo
+
+@{
+    ViewData["Title"] = "Ver Periodo";
+}
+
+<h1>Detalles del Periodo</h1>
+
+<div>
+    <h4>Periodo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.FechaInicio.ToShortDateString()
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.FechaFin)
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.FechaFin.ToShortDateString()
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class = "col-sm-9">
+            @(Model.Activo ? "Sí" : "No")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+</div>
