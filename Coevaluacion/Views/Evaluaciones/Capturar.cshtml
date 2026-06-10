@@ -1,0 +1,92 @@
+@model Coevaluacion.ViewModels.BatchEvaluacionViewModel
+
+@{
+    ViewData["Title"] = "Paso 2: Capturar Evaluaciones";
+}
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1>Capturar Evaluaciones</h1>
+        <h4 class="text-muted">Paso 2: Evaluación de Compañeros de Equipo</h4>
+    </div>
+    <div class="col-md-4 text-end">
+        <div class="card bg-light">
+            <div class="card-body py-2">
+                <strong>Evaluador:</strong> @Model.EvaluadorNombre<br />
+                <strong>Periodo:</strong> @Model.PeriodoNombre<br />
+                <strong>Compañeros:</strong> @Model.Companeros.Count
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form asp-action="Capturar" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <input type="hidden" asp-for="EvaluadorId" />
+    <input type="hidden" asp-for="EvaluadorNombre" />
+    <input type="hidden" asp-for="PeriodoId" />
+    <input type="hidden" asp-for="PeriodoNombre" />
+
+    @for (int i = 0; i < Model.Companeros.Count; i++)
+    {
+        <div class="card mb-5 border-primary shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Evaluando a: <strong>@Model.Companeros[i].EvaluadoNombre</strong></h4>
+            </div>
+            <div class="card-body">
+                <input type="hidden" asp-for="Companeros[i].EvaluadoId" />
+                <input type="hidden" asp-for="Companeros[i].EvaluadoNombre" />
+
+                <div class="row">
+                    @for (int j = 0; j < Model.Companeros[i].Criterios.Count; j++)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="p-3 border rounded bg-light h-100">
+                                <input type="hidden" asp-for="Companeros[i].Criterios[j].CriterioId" />
+                                <input type="hidden" asp-for="Companeros[i].Criterios[j].Nombre" />
+                                <input type="hidden" asp-for="Companeros[i].Criterios[j].Descripcion" />
+
+                                <h5>@Model.Companeros[i].Criterios[j].Nombre</h5>
+                                @if (!string.IsNullOrEmpty(Model.Companeros[i].Criterios[j].Descripcion))
+                                {
+                                    <p class="small text-muted mb-2">@Model.Companeros[i].Criterios[j].Descripcion</p>
+                                }
+
+                                <div class="form-group mt-auto">
+                                    <label asp-for="Companeros[i].Criterios[j].Calificacion" class="fw-bold">Calificación [1-10]</label>
+                                    <input asp-for="Companeros[i].Criterios[j].Calificacion" class="form-control" type="number" min="1" max="10" />
+                                    <span asp-validation-for="Companeros[i].Criterios[j].Calificacion" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Companeros[i].Comentario" class="fw-bold">Comentario (Opcional)</label>
+                    <textarea asp-for="Companeros[i].Comentario" class="form-control" rows="2" placeholder="Agrega un comentario sobre el desempeño de tu compañero..."></textarea>
+                    <span asp-validation-for="Companeros[i].Comentario" class="text-danger small"></span>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
+        <a asp-action="Seleccionar" class="btn btn-secondary btn-lg me-md-2">Regresar</a>
+        <button type="submit" class="btn btn-success btn-lg px-5">Guardar Evaluaciones</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

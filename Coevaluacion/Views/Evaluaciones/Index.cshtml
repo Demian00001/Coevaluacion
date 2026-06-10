@@ -1,0 +1,41 @@
+@model IEnumerable<Coevaluacion.Models.Evaluacion>
+
+@{
+    ViewData["Title"] = "Evaluaciones Registradas";
+}
+
+<h1>Evaluaciones Registradas</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<p>
+    <a asp-action="Seleccionar" class="btn btn-primary">+ Nueva Evaluación por Lotes</a>
+</p>
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Fecha</th>
+            <th>Periodo</th>
+            <th>Evaluador</th>
+            <th>Evaluado</th>
+            <th>Comentario</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Fecha.ToShortDateString()</td>
+            <td>@item.Periodo.Nombre</td>
+            <td>@($"{item.Evaluador.Nombre} {item.Evaluador.Apellido}")</td>
+            <td>@($"{item.Evaluado.Nombre} {item.Evaluado.Apellido}")</td>
+            <td>@item.Comentario</td>
+        </tr>
+}
+    </tbody>
+</table>
