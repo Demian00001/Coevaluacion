@@ -30,6 +30,26 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Criterios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGVyaW9zL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Criterios/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGVyaW9zL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Criterios/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGVyaW9zL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Criterios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGVyaW9zL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Criterios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGVyaW9zL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/damian/Documents/Coevaluacion/Coevaluacion/Views/Equipos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXF1aXBvcy9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
